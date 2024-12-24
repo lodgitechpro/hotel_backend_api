@@ -1,0 +1,12 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  security:
+    enabled: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug

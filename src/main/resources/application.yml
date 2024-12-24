@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: hotel-backend-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hotelms
+    username: postgres
+    password: test#123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    url: jdbc:postgresql://localhost:5432/hotelms
+    user: postgres
+    password: test#123
+    baselineOnMigrate: true
+
+application:
+  security:
+    jwt:
+      secret-key: v1jhZ6j7xbnCR4tg+PUn9j0Hj7FjGwSxcV7SGJZ0SoHyM8UWgFToWbkQDbEDEHoB
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days

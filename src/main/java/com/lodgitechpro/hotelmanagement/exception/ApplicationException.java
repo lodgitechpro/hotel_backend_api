@@ -1,6 +1,6 @@
 package com.lodgitechpro.hotelmanagement.exception;
 
-import com.lodgitechpro.hotelmanagement.enums.ErrorCode;
+import com.lodgitechpro.hotelmanagement.auth.enums.ErrorCode;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 

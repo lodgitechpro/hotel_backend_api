@@ -1,6 +1,6 @@
 package com.lodgitechpro.hotelmanagement.auth.audit;
 
-import com.lodgitechpro.hotelmanagement.auth.entity.Employee;
+import com.lodgitechpro.hotelmanagement.entity.Employee;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;

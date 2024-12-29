@@ -26,6 +26,8 @@ spring:
     user: postgres
     password: test#123
     baselineOnMigrate: true
+  security:
+    enabled: false # remove this line before prod.
 
 application:
   security:

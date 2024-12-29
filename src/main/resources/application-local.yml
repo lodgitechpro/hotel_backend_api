@@ -3,4 +3,4 @@ spring:
     activate:
       on-profile: local
   security:
-    enabled: true
+    enabled: false

@@ -1,30 +1,39 @@
 CREATE TABLE IF NOT EXISTS organization (
     id SERIAL PRIMARY KEY,
-    DESCRIPTION VARCHAR(255),
-    TITLE VARCHAR(255),
-    EMAIL_ADDRESS VARCHAR(255),
-    WEBSITE VARCHAR(255),
-    ACTIVE BOOLEAN default true,
-    SLOGAN VARCHAR(255),
-    APP_SERVER VARCHAR(255),
-    CREATED_BY VARCHAR(255),
-    CREATED_DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CRTD_SESSION_ID VARCHAR(255)
+    description VARCHAR(255),
+    title VARCHAR(255) NOT NULL,
+    email_address VARCHAR(255) UNIQUE,
+    website VARCHAR(255) UNIQUE,
+    active BOOLEAN DEFAULT TRUE,
+    slogan VARCHAR(255),
+    app_server VARCHAR(255),
+    tax_id VARCHAR(50),
+    corporate_contact VARCHAR(255),
+    industry_type VARCHAR(100),
+    created_by VARCHAR(255),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS location (
-    id BIGINT PRIMARY KEY,
-    DESCRIPTION VARCHAR(255),
-    ACTIVE BOOLEAN default true,
-    ORG_ID BIGINT,
-    ADDRESS VARCHAR(255),
-    CONTACT_INFO VARCHAR(255),
-    LEFT_LOGO VARCHAR(255),
-    RIGHT_LOGO VARCHAR(255),
-    CREATED_BY VARCHAR(255),
-    CREATED_DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CRTD_SESSION_ID VARCHAR(255),
-    FOREIGN KEY (ORG_ID) REFERENCES ORGANIZATION(id)
+    id SERIAL PRIMARY KEY,
+    org_id INT NOT NULL,
+    description VARCHAR(255),
+    active BOOLEAN DEFAULT TRUE,
+    street_address VARCHAR(255),
+    city VARCHAR(100) NOT NULL,
+    state VARCHAR(100),
+    zip_code VARCHAR(20),
+    country VARCHAR(100) NOT NULL,
+    latitude DECIMAL(9,6),
+    longitude DECIMAL(9,6),
+    contact_info VARCHAR(255),
+    left_logo VARCHAR(255),
+    right_logo VARCHAR(255),
+    created_by VARCHAR(255),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    parent_location_id BIGINT,
+    FOREIGN KEY (org_id) REFERENCES organization(id) ON DELETE CASCADE,
+    FOREIGN KEY (parent_location_id) REFERENCES location(id)
 );
 
 CREATE TABLE employee (
@@ -53,3 +62,5 @@ CREATE TABLE token (
 
 CREATE SEQUENCE employee_seq START 1001;
 CREATE SEQUENCE token_seq START 1;
+CREATE SEQUENCE organization_seq START 1001;
+CREATE SEQUENCE location_seq START 1001;

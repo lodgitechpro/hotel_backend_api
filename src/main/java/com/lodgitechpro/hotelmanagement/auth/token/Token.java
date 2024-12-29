@@ -1,6 +1,6 @@
 package com.lodgitechpro.hotelmanagement.auth.token;
 
-import com.lodgitechpro.hotelmanagement.entity.Employee;
+import com.lodgitechpro.hotelmanagement.auth.entity.Employee;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

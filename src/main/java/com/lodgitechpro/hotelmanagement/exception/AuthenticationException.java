@@ -1,7 +1,7 @@
 package com.lodgitechpro.hotelmanagement.exception;
 
 
-import com.lodgitechpro.hotelmanagement.enums.AuthCode;
+import com.lodgitechpro.hotelmanagement.auth.enums.AuthCode;
 
 public class AuthenticationException extends RuntimeException {
 

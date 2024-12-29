@@ -49,5 +49,5 @@ public class Guest extends Auditable {
     private String country;
 
     @Column(name = "ZIP_CODE")
-    private Integer zipCode;
+    private String zipCode;
 }

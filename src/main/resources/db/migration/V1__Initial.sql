@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS organization (
     corporate_contact VARCHAR(255),
     industry_type VARCHAR(100),
     created_by VARCHAR(255),
-    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS location (
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS location (
     left_logo VARCHAR(255),
     right_logo VARCHAR(255),
     created_by VARCHAR(255),
-    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     parent_location_id BIGINT,
     FOREIGN KEY (org_id) REFERENCES organization(id) ON DELETE CASCADE,
     FOREIGN KEY (parent_location_id) REFERENCES location(id)
@@ -64,3 +64,65 @@ CREATE SEQUENCE employee_seq START 1001;
 CREATE SEQUENCE token_seq START 1;
 CREATE SEQUENCE organization_seq START 1001;
 CREATE SEQUENCE location_seq START 1001;
+
+INSERT INTO organization (
+    id,
+    description,
+    title,
+    email_address,
+    website,
+    active,
+    slogan,
+    app_server,
+    tax_id,
+    corporate_contact,
+    industry_type,
+    created_by
+) VALUES (
+    1,
+    'Tech solutions for businesses',
+    'MJ Enterprise Solutions',
+    'contact@mjesolutions.com',
+    'https://www.mjesolutions.com',
+    TRUE,
+    'Innovate, Automate, Succeed',
+    'AWS',
+    '123-456-789',
+    'John Doe',
+    'Technology',
+    'admin'
+);
+
+INSERT INTO location (
+    id,
+    org_id,
+    description,
+    active,
+    street_address,
+    city,
+    state,
+    zip_code,
+    country,
+    latitude,
+    longitude,
+    contact_info,
+    left_logo,
+    right_logo,
+    created_by
+) VALUES (
+    1,
+    1,
+    'Main office',
+    TRUE,
+    '123 Innovation Way',
+    'Houston',
+    'Texas',
+    '77001',
+    'USA',
+    29.7604,
+    -95.3698,
+    'info@mjesolutions.com',
+    'left_logo.png',
+    'right_logo.png',
+    'admin'
+);

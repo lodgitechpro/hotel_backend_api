@@ -35,7 +35,7 @@ public class Rooms extends Auditable {
     private int maxOccupancy;
 
     @Column(name = "PRICE_PER_NIGHT")
-    private String pricePerNight;
+    private Double pricePerNight;
 
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)

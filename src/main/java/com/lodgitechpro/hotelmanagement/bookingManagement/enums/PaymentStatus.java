@@ -9,7 +9,8 @@ public enum PaymentStatus {
     FAILED("Failed"),
     REFUNDED("Refunded"),
     PARTIALLY_REFUNDED("Partially Refunded"),
-    CANCELLED("Cancelled");
+    CANCELLED("Cancelled"),
+    SUCCESS("Success");
 
     private final String displayName;
 

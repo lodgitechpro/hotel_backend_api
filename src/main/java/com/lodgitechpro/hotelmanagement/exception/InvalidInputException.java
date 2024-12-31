@@ -1,11 +1,13 @@
 package com.lodgitechpro.hotelmanagement.exception;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class EntityNotFoundException extends RuntimeException {
-    public EntityNotFoundException(String message) {
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public class InvalidInputException extends RuntimeException {
+
+    public InvalidInputException(String message) {
         super(message);
     }
 }

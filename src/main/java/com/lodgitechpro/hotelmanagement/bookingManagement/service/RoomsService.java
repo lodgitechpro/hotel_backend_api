@@ -2,8 +2,10 @@ package com.lodgitechpro.hotelmanagement.bookingManagement.service;
 
 import com.lodgitechpro.hotelmanagement.bookingManagement.dtos.RoomsDto;
 import com.lodgitechpro.hotelmanagement.bookingManagement.entity.Rooms;
+import com.lodgitechpro.hotelmanagement.bookingManagement.enums.RoomStatus;
 import com.lodgitechpro.hotelmanagement.bookingManagement.repository.RoomsRepository;
 import com.lodgitechpro.hotelmanagement.exception.EntityNotFoundException;
+import com.lodgitechpro.hotelmanagement.exception.InvalidInputException;
 import com.lodgitechpro.hotelmanagement.mapper.EntityMapper;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
@@ -92,5 +94,20 @@ public class RoomsService {
 
     public List<Rooms> getAvailableRooms(Integer locationId, Date checkIn, Date checkOut) {
         return roomsRepository.findAvailableRooms(locationId, checkIn, checkOut);
+    }
+
+    public void updateRoomStatus(Integer roomId, String status) {
+        Rooms room = roomsRepository.findById(roomId)
+                .orElseThrow(() -> new EntityNotFoundException("Room not found with id: " + roomId));
+
+        // Validate the status (optional, if you are using a predefined set of statuses)
+        try {
+            RoomStatus newStatus = RoomStatus.valueOf(status.toUpperCase());
+            room.setStatus(newStatus);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidInputException("Invalid room status: " + status);
+        }
+
+        roomsRepository.save(room); // Persist the updated entity
     }
 }

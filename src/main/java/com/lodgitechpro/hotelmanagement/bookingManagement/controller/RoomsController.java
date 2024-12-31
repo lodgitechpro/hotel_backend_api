@@ -1,5 +1,6 @@
 package com.lodgitechpro.hotelmanagement.bookingManagement.controller;
 
+import com.lodgitechpro.hotelmanagement.bookingManagement.dtos.RoomStatusDto;
 import com.lodgitechpro.hotelmanagement.bookingManagement.dtos.RoomsDto;
 import com.lodgitechpro.hotelmanagement.bookingManagement.entity.Rooms;
 import com.lodgitechpro.hotelmanagement.bookingManagement.service.RoomsService;
@@ -28,6 +29,14 @@ public class RoomsController {
     public ResponseEntity<Rooms> getRoomById(@PathVariable Integer roomId) {
         Rooms room = roomService.getRoomById(roomId);
         return ResponseEntity.ok(room);
+    }
+
+    @PatchMapping("/{roomId}/status")
+    public ResponseEntity<Void> updateRoomStatus(
+            @PathVariable Integer roomId,
+            @RequestBody RoomStatusDto roomStatusDto) {
+        roomService.updateRoomStatus(roomId, roomStatusDto.getStatus());
+        return ResponseEntity.noContent().build(); // 204 No Content for successful update
     }
 
     @GetMapping

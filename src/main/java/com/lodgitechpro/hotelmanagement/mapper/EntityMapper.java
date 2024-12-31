@@ -14,6 +14,15 @@ public class EntityMapper {
         return modelMapper.map(dto, entityClass);
     }
 
-
-
+    /**
+     * Maps updates from a DTO to an existing entity instance.
+     *
+     * @param dto         The DTO containing the updated values.
+     * @param entity      The existing entity instance to update.
+     * @param <D>         The type of the DTO.
+     * @param <T>         The type of the entity.
+     */
+    public <D, T> void mapDtoToEntity(D dto, T entity) {
+        modelMapper.map(dto, entity);
+    }
 }

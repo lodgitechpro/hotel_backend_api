@@ -47,7 +47,7 @@ public class RoomsAudit {
 
     @Column(name = "PREVIOUS_STATUS")
     @Enumerated(EnumType.STRING)
-    private RoomStatus previous_status;
+    private RoomStatus previousStatus;
 
     @Column(name = "CHANGED_BY", nullable = false, updatable = false)
     @CreatedBy

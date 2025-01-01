@@ -7,12 +7,14 @@ import com.lodgitechpro.hotelmanagement.bookingManagement.repository.RoomsReposi
 import com.lodgitechpro.hotelmanagement.exception.EntityNotFoundException;
 import com.lodgitechpro.hotelmanagement.exception.InvalidInputException;
 import com.lodgitechpro.hotelmanagement.mapper.EntityMapper;
+import com.lodgitechpro.hotelmanagement.util.UserUtil;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,10 +28,12 @@ public class RoomsService {
 
     private final EntityMapper entityMapper;
     private final RoomsRepository roomsRepository;
+    private final RoomsAuditService roomsAuditService;
 
     public Rooms saveAndUpdateRooms(RoomsDto roomsDto) {
         Rooms rooms = entityMapper.mapDtoToEntity(roomsDto, Rooms.class);
         rooms = roomsRepository.save(rooms);
+        roomsAuditService.logRoomAudit(rooms, rooms.getStatus(), rooms.getCreatedBy());
         return rooms;
     }
 
@@ -99,7 +103,7 @@ public class RoomsService {
     public void updateRoomStatus(Integer roomId, String status) {
         Rooms room = roomsRepository.findById(roomId)
                 .orElseThrow(() -> new EntityNotFoundException("Room not found with id: " + roomId));
-
+        RoomStatus previousStatus = room.getStatus();
         // Validate the status (optional, if you are using a predefined set of statuses)
         try {
             RoomStatus newStatus = RoomStatus.valueOf(status.toUpperCase());
@@ -109,5 +113,6 @@ public class RoomsService {
         }
 
         roomsRepository.save(room); // Persist the updated entity
+        roomsAuditService.logRoomAudit(room, previousStatus, UserUtil.getCurrentUsername());
     }
 }

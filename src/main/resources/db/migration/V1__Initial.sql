@@ -59,11 +59,39 @@ CREATE TABLE token (
     employee_id INTEGER REFERENCES employee(id)
 );
 
+CREATE TABLE IF NOT EXISTS definition_types (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT,
+    active BOOLEAN DEFAULT TRUE,
+    created_by VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_modified_by VARCHAR(255),
+    last_modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS definition_type_details (
+    id SERIAL PRIMARY KEY,
+    definition_type_id INT NOT NULL REFERENCES definition_types(id),
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    active BOOLEAN DEFAULT TRUE,
+    created_by VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_modified_by VARCHAR(255),
+    last_modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT unique_definition_detail UNIQUE (definition_type_id, name)
+);
+
+CREATE INDEX idx_definition_type_name ON definition_types(name);
+CREATE INDEX idx_definition_type_detail_type_id ON definition_type_details(definition_type_id);
 
 CREATE SEQUENCE employee_seq START 1001;
 CREATE SEQUENCE token_seq START 1;
 CREATE SEQUENCE organization_seq START 1001;
 CREATE SEQUENCE location_seq START 1001;
+CREATE SEQUENCE definition_types_seq START 1001;
+CREATE SEQUENCE definition_type_details_seq START 1001;
 
 INSERT INTO organization (
     id,

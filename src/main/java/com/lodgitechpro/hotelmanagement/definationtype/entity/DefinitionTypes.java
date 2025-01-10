@@ -1,16 +1,9 @@
 package com.lodgitechpro.hotelmanagement.definationtype.entity;
 
 import com.lodgitechpro.hotelmanagement.auth.entity.Auditable;
-import com.lodgitechpro.hotelmanagement.bookingManagement.enums.IdDocumentType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

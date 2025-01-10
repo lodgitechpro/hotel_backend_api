@@ -4,6 +4,9 @@ CREATE TABLE IF NOT EXISTS room_pricing (
     base_price NUMERIC(10, 2) NOT NULL,
     seasonal_multiplier NUMERIC(5, 2) DEFAULT 1.0,
     demand_multiplier NUMERIC(5, 2) DEFAULT 1.0,
+    start_date DATE, -- Defines when the seasonal multiplier starts
+    end_date DATE,   -- Defines when the seasonal multiplier ends
+    active BOOLEAN DEFAULT TRUE,
     created_by VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_modified_by VARCHAR(255),
@@ -35,3 +38,6 @@ CREATE TABLE IF NOT EXISTS loyalty_program (
     last_modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE SEQUENCE room_pricing_seq START 1001;
+CREATE SEQUENCE promotions_seq START 1001;
+CREATE SEQUENCE loyalty_program_seq START 1001;

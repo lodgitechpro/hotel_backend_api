@@ -1,6 +1,5 @@
 package com.lodgitechpro.hotelmanagement.bookingManagement.controller;
 
-
 import com.lodgitechpro.hotelmanagement.bookingManagement.dtos.BookingsDto;
 import com.lodgitechpro.hotelmanagement.bookingManagement.entity.Bookings;
 import com.lodgitechpro.hotelmanagement.bookingManagement.enums.BookingStatus;

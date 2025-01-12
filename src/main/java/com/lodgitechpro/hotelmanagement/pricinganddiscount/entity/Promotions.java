@@ -36,4 +36,7 @@ public class Promotions extends Auditable {
 
     @Column(name = "MAX_USAGE_LIMIT")
     private Integer maxUsageLimit;
+
+    @Column(name = "ACTIVE", nullable = false)
+    private Boolean active = true;
 }

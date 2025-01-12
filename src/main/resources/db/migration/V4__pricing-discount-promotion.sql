@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS promotions (
     valid_to DATE NOT NULL,
     applicable_room_types TEXT, -- Can store room types as JSON
     max_usage_limit INT DEFAULT NULL,
+    active BOOLEAN DEFAULT TRUE,
     created_by VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_modified_by VARCHAR(255),

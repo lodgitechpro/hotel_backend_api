@@ -27,4 +27,17 @@ public class GlobalExceptionHandler {
         ApiResponse errorResponse = new ApiResponse(ex.getErrorCode().getCode(), ex.getErrorCode().getMessage());
         return new ResponseEntity<>(errorResponse, ex.getHttpStatus());
     }
+
+    /**
+     * Handles PromotionNotFoundException and returns a structured error response.
+     */
+    @ExceptionHandler(PromotionNotFoundException.class)
+    public ResponseEntity<PromotionErrorResponse> handlePromotionNotFoundException(PromotionNotFoundException ex) {
+        PromotionErrorResponse errorResponse = new PromotionErrorResponse(
+                HttpStatus.NOT_FOUND,
+                ex.getCode(),
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
 }

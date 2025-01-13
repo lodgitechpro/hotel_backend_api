@@ -8,6 +8,6 @@ import java.time.LocalDateTime;
 public class LoyaltyProgramDto {
     private Integer id;
     private Integer guestId;
-    private Integer points = 0;
+    private Integer points;
     private LocalDateTime lastUpdated = LocalDateTime.now();
 }
